@@ -1,0 +1,17 @@
+[package]
+name = "libc-system"
+version = "0.1.0"
+edition = "2021"
+authors = ["Cecile Tonglet <cecile.tonglet@cecton.com>"]
+license = "MIT OR Apache-2.0"
+rust-version = "1.64"
+description = "Single cross‑platform function, system, to execute a shell command and return its exit code"
+repository = "https://github.com/cecton/libc-system"
+homepage = "https://github.com/cecton/libc-system"
+documentation = "https://docs.rs/libc-system"
+readme = "README.md"
+include = ["src/**/*.rs", "README.md", "LICENSE.Apache-2.0", "LICENSE.MIT"]
+keywords = ["system", "libc", "windows", "wsystem", "run"]
+categories = ["api-bindings"]
+
+[dependencies]
