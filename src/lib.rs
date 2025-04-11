@@ -35,9 +35,11 @@ pub fn system(command: &str) -> i32 {
         pub fn system(s: *const std::ffi::c_char) -> std::ffi::c_int;
     }
 
-    let Ok(c_command) = std::ffi::CString::new(command) else {
-        return -1;
+    let c_command = match std::ffi::CString::new(command) {
+        Ok(s) => s,
+        Err(_) => return -1,
     };
+
     unsafe { system(c_command.as_ptr()) }
 }
 
