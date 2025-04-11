@@ -35,7 +35,9 @@ pub fn system(command: &str) -> i32 {
         pub fn system(s: *const std::ffi::c_char) -> std::ffi::c_int;
     }
 
-    let c_command = std::ffi::CString::new(command).expect("nul byte in command line");
+    let Ok(c_command) = std::ffi::CString::new(command) else {
+        return -1;
+    };
     unsafe { system(c_command.as_ptr()) }
 }
 
@@ -45,6 +47,10 @@ pub fn system(command: &str) -> i32 {
 
     extern "C" {
         pub fn _wsystem(command: *const std::ffi::c_ushort) -> std::ffi::c_int;
+    }
+
+    if command.find("\0").is_some() {
+        return -1;
     }
 
     let wide: Vec<u16> = std::ffi::OsStr::new(command)
